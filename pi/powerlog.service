@@ -1,0 +1,10 @@
+[Unit]
+Description=Power health logger (voltage/throttle/temp to CSV)
+
+[Service]
+ExecStart=/usr/bin/dronegsm-powerlog
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

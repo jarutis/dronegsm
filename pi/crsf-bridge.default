@@ -1,0 +1,8 @@
+# CRSF bridge configuration
+UART_DEV=/dev/serial0
+BAUD=420000
+UDP_PORT=14555
+# Rate at which CRSF frames are sent to the FC (Hz)
+SEND_HZ=100
+# If no UDP packet arrives within this many ms, stop TX -> Betaflight failsafe
+FAILSAFE_MS=200

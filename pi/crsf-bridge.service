@@ -1,0 +1,14 @@
+[Unit]
+Description=CRSF RC bridge (UDP -> UART to Betaflight FC)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=/etc/default/crsf-bridge
+ExecStart=/usr/bin/dronegsm-crsf-bridge
+Restart=always
+RestartSec=2
+User=pi
+
+[Install]
+WantedBy=multi-user.target

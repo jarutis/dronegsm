@@ -1,0 +1,7 @@
+# MSP DisplayPort relay config. dtoverlay=uart5 creates /dev/ttyAMA5 on this
+# Pi (verified Aug 14 2026) — wired to FC UART3 pads (R3/T3) via the Calyx
+# underside pass-through, pins 32 (TXD) / 33 (RXD).
+UART_DEV=/dev/ttyAMA5
+BAUD=115200
+GROUND_HOST=100.93.73.24
+UDP_PORT=14557

@@ -1,0 +1,14 @@
+[Unit]
+Description=MSP DisplayPort relay (FC UART <-> ground over UDP)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=/etc/default/msp-fwd
+ExecStart=/usr/bin/python3 /usr/local/bin/msp-fwd.py
+Restart=always
+RestartSec=2
+User=pi
+
+[Install]
+WantedBy=multi-user.target

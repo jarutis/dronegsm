@@ -1,0 +1,14 @@
+[Unit]
+Description=Calyx LTE signal metrics poller (AT port -> JSON over UDP)
+After=calyx-at.service
+Wants=calyx-at.service
+
+[Service]
+EnvironmentFile=-/etc/default/modem-stats
+ExecStart=/usr/bin/python3 /usr/local/bin/modem-stats.py
+Restart=always
+RestartSec=5
+User=pi
+
+[Install]
+WantedBy=multi-user.target
