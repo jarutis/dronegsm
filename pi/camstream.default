@@ -1,0 +1,11 @@
+STREAM_HOST=100.93.73.24
+STREAM_PORT=5600
+STREAM_WIDTH=1280
+STREAM_HEIGHT=720
+STREAM_FPS=30
+STREAM_BITRATE=2000000
+# RTP payload MTU: keep <= tailscale0 MTU (1280) to avoid IP fragmentation over
+# the tunnel, where one lost fragment costs the whole RTP packet.
+STREAM_MTU=1200
+# Keyframe interval in frames (15 = every 0.5 s at 30 fps)
+STREAM_GOP=15

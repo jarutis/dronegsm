@@ -1,0 +1,15 @@
+[Unit]
+Description=CSI camera stream (rpicam-vid -> RTP/H.264 over UDP, hw encoder)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=/etc/default/camstream
+ExecStartPre=/bin/sh -c 'for i in $(seq 1 60); do ip route get ${STREAM_HOST} >/dev/null 2>&1 && exit 0; sleep 2; done'
+ExecStart=/bin/bash -c "rpicam-vid -t 0 -n --rotation 180 --mode 1640:1232 --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx219_noir.json --width ${STREAM_WIDTH} --height ${STREAM_HEIGHT} --framerate ${STREAM_FPS} --bitrate ${STREAM_BITRATE} --intra ${STREAM_GOP} --profile baseline --inline --codec h264 -o - | gst-launch-1.0 fdsrc fd=0 do-timestamp=true ! h264parse ! rtph264pay config-interval=1 pt=96 mtu=${STREAM_MTU} ! udpsink host=${STREAM_HOST} port=${STREAM_PORT}"
+Restart=always
+RestartSec=2
+User=pi
+
+[Install]
+WantedBy=multi-user.target
