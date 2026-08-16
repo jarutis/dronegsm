@@ -1,0 +1,13 @@
+[Unit]
+Description=Bind Calyx EBD021 AT ports (must run after rndis_host claims the network interfaces)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 8
+ExecStart=/bin/sh -c 'modprobe option && echo "1d12 0101" > /sys/bus/usb-serial/drivers/option1/new_id || true'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
